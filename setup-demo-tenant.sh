@@ -13,10 +13,14 @@ echo "📝 Step 1: Creating tenant and domain..."
 php artisan tinker --execute="
 use App\Models\Tenant;
 
-\$tenant = Tenant::create(['id' => 'demo']);
+\$tenant = Tenant::create([
+    'id' => 'demo',
+    'name' => 'Demo Company'
+]);
 \$tenant->domains()->create(['domain' => 'demo.localhost']);
 
 echo 'Tenant: ' . \$tenant->id . PHP_EOL;
+echo 'Name: ' . \$tenant->name . PHP_EOL;
 echo 'Domain: demo.localhost' . PHP_EOL;
 "
 
@@ -25,7 +29,7 @@ echo "=========================================="
 
 # Step 2: Run tenant migrations
 echo "🗄️  Step 2: Running tenant migrations..."
-php artisan tenants:migrate --tenant=demo
+php artisan tenants:migrate --tenants=demo
 
 echo ""
 echo "=========================================="
